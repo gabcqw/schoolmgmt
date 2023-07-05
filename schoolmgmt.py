@@ -1,10 +1,20 @@
 #create a dictionary document to record the inputs. QQ- can I leave the default value blank?
 school_dict = {
-    "student": {"f_name": "A", "l_name": "CC", "class_attended":"2A"},
-    "teacher": {"f_name":"B", "l_name": "C", "subject":"C", "class_teach": "2C" },
-    "homeroom_teacher": {"f_name": "F", "l_name": "D", "class_lead": "A" },
+    "student": [{"f_name": "A", "l_name": "CC", "class_attended":"2A"}],
+    "teacher": [{"f_name":"B", "l_name": "C", "subject":"C", "class_teach": "2C" }],
+    "homeroom_teacher": [{"f_name": "F", "l_name": "D", "class_lead": "A" }],
 }
-history = []
+print(school_dict)
+
+name = input("Provide name: ")
+last_name = input("Provide last name: ")
+students_class = input("Provide class for this student: ")
+
+temp_dict = {
+  "f_name": name,
+  "l_name": last_name,
+  "class_attended": students_class
+}
 
 
 def greeting_message(): 
@@ -26,10 +36,11 @@ def create_account(key):
             f_name= input("Provide the first name:  ")#student_account():
             l_name = input("Provide the last name:  ")
             class_attended = input("Provide the class name: ")
-            school_dict[key] = {}
-            school_dict[key]['f_name'] = f_name
-            school_dict[key]['l_namet'] = l_name
-            school_dict[key]['class_attended'] = class_attended
+            temp_dict = {}
+            temp_dict['f_name'] = f_name
+            temp_dict['l_name'] = l_name
+            temp_dict['class_attended'] = class_attended
+            school_dict["student"].append(temp_dict)
             print("The student has been created.")           
             break
         elif key == "teacher": #teacher_account():
@@ -37,21 +48,23 @@ def create_account(key):
             l_name = input("Provide the last name:  ")
             subject = input("Provide the subject name:  ")
             class_teach = input("Provide the class you teach: ")
-            school_dict[key] = {}
-            school_dict[key]['f_name'] = f_name
-            school_dict[key]['l_namet'] = l_name
-            school_dict[key]['subject'] = subject
-            school_dict[key]['class_teach '] = class_teach
+            temp_dict = {}
+            temp_dict['f_name'] = f_name
+            temp_dict['l_name'] = l_name
+            temp_dict['subject'] = subject
+            temp_dict['class_teach '] = class_teach
+            temp_dict["teacher"].append(temp_dict)
             print("The teacher has been created.")
             break
         elif key == "homeroom_teacher": #def homeroom_teacher_account():
             f_name = input("Provide the first name:  ")
             l_name = input("Provide the last name:  ")
             class_lead = input("Provide the class name you lead: ")
-            school_dict[key] = {}
-            school_dict[key]['f_name'] = f_name
-            school_dict[key]['l_namet'] = l_name
-            school_dict[key]['class_lead'] = class_lead            
+            temp_dict = {}
+            temp_dict['f_name'] = f_name
+            temp_dict['l_name'] = l_name
+            temp_dict['class_lead'] = class_lead
+            temp_dict["homeroom_teacher"].append(temp_dict)            
             print("The homeroom teacher has been created.")
             break
         else:
@@ -88,7 +101,14 @@ def manage_account(key):
                         print(f"{student['f_name']} {student['l_name']} ")
         #how to print class as a variable? - 
         #'class': Prompt for a class to display (e.g., "3C"), the program should list all students in the class and the homeroom teache
-
+            search_class = input("Provide class for search: ")
+            for student in school_dict["student"]:
+                if student["class_attended"] == search_class:
+                    print(student)
+            for student in school_dict["homeroom_teacher"]:
+                if homeroom_teacher["class_lead"] == search_class:
+                    print(homeroom_teacher)
+        
         elif key == "end":
             break
         else:
