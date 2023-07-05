@@ -40,7 +40,7 @@ def create_account(key):
             temp_dict['f_name'] = f_name
             temp_dict['l_name'] = l_name
             temp_dict['class_attended'] = class_attended
-            school_dict["student"].append(temp_dict)
+            temp_dict["student"].append(temp_dict)
             print("The student has been created.")           
             break
         elif key == "teacher": #teacher_account():
