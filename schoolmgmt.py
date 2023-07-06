@@ -6,15 +6,6 @@ school_dict = {
 }
 print(school_dict)
 
-name = input("Provide name: ")
-last_name = input("Provide last name: ")
-students_class = input("Provide class for this student: ")
-
-temp_dict = {
-  "f_name": name,
-  "l_name": last_name,
-  "class_attended": students_class
-}
 
 
 def greeting_message(): 
@@ -30,50 +21,53 @@ def greeting_message():
 #create the function teacher， let teachers provide first names， last names，subjects they teach and classes they teach
 #create the function homeroom teacher， let home teachers provide first names， last names，and classes they lead
 #Shall we show the inputs? What about the data structure? Dictionary or list?
-def create_account(key):
+def create_account(option):
     while True:
-        if key == "student":
-            f_name= input("Provide the first name:  ")#student_account():
-            l_name = input("Provide the last name:  ")
-            class_attended = input("Provide the class name: ")
-            temp_dict = {}
-            temp_dict['f_name'] = f_name
-            temp_dict['l_name'] = l_name
-            temp_dict['class_attended'] = class_attended
-            temp_dict["student"].append(temp_dict)
-            print("The student has been created.")           
-            break
-        elif key == "teacher": #teacher_account():
-            f_name = input("Provide the first name:  ")
-            l_name = input("Provide the last name:  ")
-            subject = input("Provide the subject name:  ")
-            class_teach = input("Provide the class you teach: ")
-            temp_dict = {}
-            temp_dict['f_name'] = f_name
-            temp_dict['l_name'] = l_name
-            temp_dict['subject'] = subject
-            temp_dict['class_teach '] = class_teach
-            temp_dict["teacher"].append(temp_dict)
+        option = input("Enter the user type you tend to create: ")
+        if option== "student":
+            name= input("Provide the first name:  ")#student_account():
+            last_name = input("Provide the last name:  ")
+            students_class = input("Provide the class name of the student: ")
+            temp_dict = { "f_name": name,
+                "l_name": last_name,
+                "class_attended": students_class
+            }
+            print("The student has been created.") 
+            school_dict["student"].append(temp_dict)
+                      
+        elif option == "teacher": #teacher_account():
+            name = input("Provide the first name:  ")
+            last_name= input("Provide the last name:  ")
+            subjects = input("Provide the subject name:  ")
+            teacher_teach = input("Provide the class you teach: ")
+            temp_dict = { "f_name": name,
+                "l_name": last_name,
+                "subject": subjects,
+                "class_teach":teacher_teach
+            }
             print("The teacher has been created.")
-            break
-        elif key == "homeroom_teacher": #def homeroom_teacher_account():
-            f_name = input("Provide the first name:  ")
-            l_name = input("Provide the last name:  ")
-            class_lead = input("Provide the class name you lead: ")
-            temp_dict = {}
-            temp_dict['f_name'] = f_name
-            temp_dict['l_name'] = l_name
-            temp_dict['class_lead'] = class_lead
-            temp_dict["homeroom_teacher"].append(temp_dict)            
+            school_dict["teacher"].append(temp_dict)
+            
+            
+        elif option == "homeroom_teacher": #def homeroom_teacher_account():
+            name = input("Provide the first name:  ")
+            last_name = input("Provide the last name:  ")
+            Class_youlead= input("Provide the class name you lead: ")
+            temp_dict = { "f_name": name,
+                "l_name": last_name,
+                "class_lead":Class_youlead
+            }
             print("The homeroom teacher has been created.")
-            break
+            school_dict["homeroom_teacher"].append(temp_dict)            
+            
         else:
             print("It's invalid input! Please try again. ")
 
 
-def manage_account(key):
+def manage_account(option):
     while True:
-        if key == "student":
+        option = input("Enter the user you tend to manage: ")
+        if option == "student":
             f_name = input("Enter first name: ")
             l_name = input("Enter last name: ")
             for student in school_dict["student"]:
@@ -83,14 +77,14 @@ def manage_account(key):
                     if student['class_attend'] == teacher['class_teach']:
                         print(f"{teacher['f_name']} {teacher['l_name']} ")
 
-        elif key == "teacher":
+        elif option == "teacher":
             f_name = input("Enter first name: ")
             l_name = input("Enter last name: ")
             for teacher in school_dict["teacher"]:
                 if teacher ['f_name'] == f_name and teacher['l_name'] == l_name:
                     print(f"{teacher['f_name']} {teacher['l_name']} teaches class {student['class_attend']} ")
 
-        elif key == "homeroom_teacher":
+        elif option == "homeroom_teacher":
             f_name = input("Enter first name: ")
             l_name = input("Enter last name: ")
             for homeroom_teacher in school_dict["homeroom_teacher"]:
@@ -109,10 +103,11 @@ def manage_account(key):
                 if homeroom_teacher["class_lead"] == search_class:
                     print(homeroom_teacher)
         
-        elif key == "end":
+        elif option == "end":
             break
         else:
             print("It's invalid input! Please try again. ")
+            break
 
 
 
@@ -121,11 +116,9 @@ while True:
     greeting_message()
     option = input("Choose an option (end, create or manage): ").lower()
     if option == "create":
-        create_account = input("Enter the user type you tend to create: ")
-        create_account #do I need to put like create_account(key)?
+        create_account (option) 
     elif option == "manage":
-        manage_account = input("Enter the user you tend to manage: ")
-        pass #create(manage_account)
+        manage_account (option) 
     elif option == "end":
         break
     else:
