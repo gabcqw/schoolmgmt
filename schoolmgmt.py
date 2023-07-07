@@ -1,6 +1,6 @@
 #create a dictionary document to record the inputs. QQ- can I leave the default value blank?
 school_dict = {
-    "student": [{"f_name": "A", "l_name": "CC", "class_attended":"2A"}],
+    "student": [{"f_name": "A", "l_name": "CC", "class_attend":"2A"}],
     "teacher": [{"f_name":"B", "l_name": "C", "subject":"C", "class_teach": "2C" }],
     "homeroom_teacher": [{"f_name": "F", "l_name": "D", "class_lead": "A" }],
 }
@@ -30,10 +30,11 @@ def create_account(option):
             students_class = input("Provide the class name of the student: ")
             temp_dict = { "f_name": name,
                 "l_name": last_name,
-                "class_attended": students_class
+                "class_attend": students_class
             }
             print("The student has been created.") 
             school_dict["student"].append(temp_dict)
+            break
                       
         elif option == "teacher": #teacher_account():
             name = input("Provide the first name:  ")
@@ -47,6 +48,7 @@ def create_account(option):
             }
             print("The teacher has been created.")
             school_dict["teacher"].append(temp_dict)
+            break
             
             
         elif option == "homeroom_teacher": #def homeroom_teacher_account():
@@ -58,10 +60,14 @@ def create_account(option):
                 "class_lead":Class_youlead
             }
             print("The homeroom teacher has been created.")
-            school_dict["homeroom_teacher"].append(temp_dict)            
+            school_dict["homeroom_teacher"].append(temp_dict)
+            break
+        elif option == "end":
+            break            
             
         else:
             print("It's invalid input! Please try again. ")
+            break
 
 
 def manage_account(option):
@@ -75,7 +81,7 @@ def manage_account(option):
                     print(f"{student['f_name']} {student['l_name']} attends class {student['class_attend']} ")
                     print("Student's teachers:")
                     if student['class_attend'] == teacher['class_teach']:
-                        print(f"{teacher['f_name']} {teacher['l_name']} ")
+                        print(f"{teacher['f_name']} {teacher['l_name']} teaches this class")
 
         elif option == "teacher":
             f_name = input("Enter first name: ")
@@ -97,11 +103,12 @@ def manage_account(option):
         #'class': Prompt for a class to display (e.g., "3C"), the program should list all students in the class and the homeroom teache
             search_class = input("Provide class for search: ")
             for student in school_dict["student"]:
-                if student["class_attended"] == search_class:
+                if student["class_attend"] == search_class:
                     print(student)
             for student in school_dict["homeroom_teacher"]:
                 if homeroom_teacher["class_lead"] == search_class:
                     print(homeroom_teacher)
+                
         
         elif option == "end":
             break
